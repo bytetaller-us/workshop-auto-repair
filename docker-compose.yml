@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: auto-repair-erp
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=file:/app/data/prod.db
+      - NEXT_PUBLIC_SHOP_NAME=Garden State Auto Tech & Repair
+      - NEXT_PUBLIC_SHOP_ADDRESS=123 Hudson St, Jersey City, NJ 07302
+      - NEXT_PUBLIC_SHOP_PHONE=(201) 555-0199
+      - NEXT_PUBLIC_SHOP_NJ_LICENSE=NJ-DCA-MVRP# 987654321
+      - NEXT_PUBLIC_NJ_TAX_RATE=0.06625
+    volumes:
+      - erp-data:/app/data
+
+volumes:
+  erp-data:
